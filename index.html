@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #000;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        a {
+            color: #00ffbf;
+            text-decoration: none;
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+
+        section {
+            text-align: center;
+            display: none;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #fff;
+		
+        }
+
+        .snowfall, .shooting-stars-container, .color-drops-container, .ashfall-container, .drifting-stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .snowflake, .raindrop, .shooting-star, .color-drop, .ashfall, .drifting-star, .firefly {
+            position: absolute;
+            opacity: 0.8;
+            border-radius: 50%;
+        }
+
+        .snowflake {
+            background-color: #fff;
+            width: 5px;
+            height: 5px;
+            animation: snowfallAnimation linear infinite;
+            transform-origin: 0 0;
+        }
+
+        .raindrop {
+            background-color: #00f;
+            width: 2px;
+            height: 10px;
+            animation: rainAnimation linear infinite;
+        }
+
+        .shooting-star {
+            background-color: #fff;
+            width: 10px;
+            height: 10px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            animation: shootingStarAnimation linear infinite;
+            transform-origin: 0 0;
+            opacity: 0;
+        }
+
+        .color-drop {
+            width: 10px;
+            height: 10px;
+            animation: colorDropAnimation linear infinite;
+            opacity: 0.8;
+        }
+
+        .ashfall {
+            background-color: #888;
+            width: 2px;
+            height: 10px;
+            animation: ashfallAnimation linear infinite;
+        }
+
+        .drifting-star {
+            background-color: blue;
+            width: 2px;
+            height: 2px;
+            animation: driftingStarAnimation linear infinite;
+        }
+
+        .firefly {
+            background-color: #ffd700;
+            width: 4px;
+            height: 4px;
+            animation: firefliesAnimation linear infinite;
+            transform-origin: 50% 50%;
+        }
+
+        .about-box {
+            background-color: Indigo;
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: auto;
+            max-width: 800px;
+            text-align: left;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .about-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            background-color: #fff;
+            z-index: 1;
+            height: 100%;
+            background-image: repeating-linear-gradient(transparent, transparent 10px, #fff 10px, #fff 20px);
+        }
+
+        .about-box img {
+            max-width: 20%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            z-index: 2;
+        }
+
+        .about-box p {
+            z-index: 2;
+
+        }
+
+	#home .paper {
+   	 position: absolute;
+   	 top: 50%;
+   	 left: 50%;
+   	 transform: translate(-50%, -50%);
+   	 display: flex;
+   	 justify-content: center;
+   	 align-items: center;
+   	 width: 350px; /* Set the width of the paper */
+   	 height: 250px; /* Set the height of the paper */
+     	 background: white; /* Set the background color to white */
+     	 border-radius: 15px;
+    	 text-align: center;
+   	 padding: 20px;
+   	 z-index: 2;
+	}
+#home .paper-content {
+    display: none;
+}
+#home .paper-content {
+    display: none;
+    transition: opacity 0.5s ease-in-out;
+    position: relative;
+    z-index: 2;
+    padding: 0 20px; /* Add padding to the content */
+    box-sizing: border-box; /* Include padding in the total width/height */
+}
+
+#home .paper-content.visible {
+    display: block;
+    opacity: 1;
+    margin-top: 10px;
+    text-align: justify; /* Add text-align property */
+}
+
+#home .paper-content p {
+        text-decoration: underline;
+        text-align: justify; /* Add this line to justify the text */
+    }
+ #home .paper-content {
+        display: none;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    #home .paper-content.visible {
+        display: block;
+        opacity: 1;
+    }
+
+    #home .paper p {
+        color: black;
+        margin: auto;
+    }
+
+    #home .paper-content p {
+        text-decoration: underline; /* Add this line to underline the text */
+    }
+
+	#home .paper p {
+  	  color: black; /* Set the text color to black */
+   	 margin: auto;
+	}
+
+   	 .contact-info {
+         text-align: center;
+
+   	 }
+
+	.sellotape-corner {
+  	  position: absolute;
+  	  width: 25px;
+   	  height: 25px;
+    	background-color: #FFD700;
+    	transform: rotate(40deg);
+	}
+
+	.top-left {
+   	 top: 0;
+   	 left: 0;
+	}
+
+	.top-right {
+ 	   top: 0;
+ 	   right: 0;
+	}
+
+	.bottom-left {
+  	  bottom: 0;
+  	  left: 0;
+	}
+
+	.bottom-right {
+    	bottom: 0;
+   	 right: 0;
+	}
+
+	.paper {
+   	 position: absolute;
+   	 top: 20%;
+   	 left: 20%;
+    	 transform: translate(-50%, -50%);
+   	 display: flex;
+    	 justify-content: center;
+  	 align-items: center;
+   	 width: 200px;
+  	 height: 200px;
+    	   
+   	 );
+   	 box-shadow: 3px 3px 2px var(--paper-shadow);
+   	 border-radius: 15px;
+   	 text-align: center;
+   	 padding: 20px;
+  	  z-index: 2;
+
+	}
+
+	.paper {
+   	 --paper-dark: #e5c93d;
+   	 --paper-color: #ffed87;
+   	 position: absolute;
+   	 top: 50%;
+   	 left: 50%;
+   	 transform: translate(-50%, -50%);
+    	display: flex;
+   	 justify-content: center;
+   	 width: 250px; /* Set the width of the paper */
+   	 height: 250px; /* Set the height of the paper */
+   	 background: linear-gradient(
+     	   135deg,
+    	    var(--paper-dark),
+     	   30%,
+   	     var(--paper-color)
+  	  );
+  	  box-shadow: 3px 3px 2px var(--paper-shadow);
+	}
+
+	.paper p {
+	  margin: auto;
+	}
+
+	.pin {
+    	--pin-color: #d02627;
+    	--pin-dark: #9e0608;
+    	--pin-light: #fc7e7d;
+
+    	position: absolute;
+    	top: 1px;  /* Adjust the top position to move the pin to the top */
+    	left: 10px; /* Adjust the left position to move the pin to the left */
+    	width: 60px;
+   	 height: 50px;
+	}
+
+	.shadow {
+ 	 position: absolute;
+ 	 top: 18px;
+ 	 left: -8px;
+ 	 width: 35px;
+ 	 height: 35px;
+ 	 border-radius: 50%;
+  	background: radial-gradient(var(--paper-shadow), 20%, rgba(201, 191, 141, 0));
+	}
+
+	.metal {
+  	position: absolute;
+ 	 width: 5px;
+ 	 height: 20px;
+ 	 background: linear-gradient(to right, #808080, 40%, #eae8e8, 50%, #808080);
+ 	 border-radius: 0 0 30% 30%;
+ 	 transform: rotate(50deg);
+	  transform-origin: bottom left;
+ 	 top: 15px;
+  	border-bottom: 1px solid #808080;
+	}
+
+	.bottom-circle {
+ 	 position: absolute;
+ 	 right: 15px;
+ 	 width: 35px;
+ 	 height: 35px;
+ 	 border-radius: 50%;
+ 	 background-color: var(--pin-color);
+ 	 background: radial-gradient(
+   	 circle at bottom right,
+   	 var(--pin-light),
+   	 25%,
+   	 var(--pin-dark),
+   	 90%,
+    	var(--pin-color)
+ 	 );
+	}
+
+	/* Barrel */
+	.bottom-circle::before {
+ 	 content: "";
+ 	 position: absolute;
+  	top: 0;
+ 	 left: -2px;
+  	width: 20px;
+  	height: 30px;
+  	transform: rotate(55deg);
+  	transform-origin: 100% 100%;
+  	border-radius: 0 0 40% 40%;
+  	background: linear-gradient(
+   	 to right,
+    	var(--pin-dark),
+   	 30%,
+   	 var(--pin-color),
+    	90%,
+   	 var(--pin-light)
+ 	 );
+	}
+
+	/* Top circle */
+	.bottom-circle::after {
+ 	 content: "";
+ 	 position: absolute;
+ 	 right: -10px;
+ 	 top: -5px;
+ 	 width: 25px;
+ 	 height: 25px;
+	  border-radius: 50%;
+	  background: radial-gradient(
+   	 circle at right,
+   	 var(--pin-light),
+   	 30%,
+   	 var(--pin-color),
+   	 var(--pin-dark) 80%
+ 	 );
+	}
+
+.background {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.flying-image {
+  position: absolute;
+  width: 100px; /* Set the width of your images */
+  height: 100px; /* Set the height of your images */
+  object-fit: cover;
+  border-radius: 50%; /* Optional: Makes images circular */
+  transition: transform 1s ease-in-out;
+}
+
+        @keyframes driftingStarAnimation {
+            0% {
+                transform: translateY(0) translateX(0);
+            }
+            100% {
+                transform: translateY(100vh) translateX(100vw);
+            }
+        }
+
+        @keyframes snowfallAnimation {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes rainAnimation {
+            0% {
+                transform: translateY(-50vh);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+
+        @keyframes shootingStarAnimation {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes colorDropAnimation {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes ashfallAnimation {
+            0% {
+                transform: translateY(-50vh);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+
+        @keyframes firefliesAnimation {
+            0% {
+                opacity: 0.5;
+                transform: translateY(0) translateX(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-5px) translateX(5px);
+            }
+            100% {
+                opacity: 0.5;
+                transform: translateY(0) translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="snowfall"></div>
+
+    <nav>
+        <ul>
+            <li onclick="showSection('home')"><a>Homepage</a></li>
+            <li onclick="showSection('about')"><a>About Me</a></li>
+            <li onclick="showSection('contact')"><a>Contact</a></li>
+            <li onclick="showSection('social-media')"><a>Social Media</a></li>
+        </ul>
+    </nav>
+
+    <section id="home">
+    <h1>Welcome to my Homepage</h1>
+       <img src="zz1.jpg" alt="Your Image" style="max-width: 33%; border-radius: 10px; margin-top: 20px;">        
+        </div>
+    </div>
+</section>
+
+
+    <section id="about">
+        <h1>About Me</h1>
+        <div class="about-box">
+            <img src="zxc1.jpg" alt="Your Image" style="max-width: 20%; border-radius: 10px; margin-bottom: 20px;">
+            <div class="zigzag-line"></div>
+            <p>Name: Adrianne Jay M. Dionisio</p>
+            <p>Age: 20</p>
+            <p>Birthdate: March 2, 2003</p>
+            <p>Course: BSIT-MI 2nd Year</p>
+            <p>School: National University Fairview</p>
+            <p>Address: Novaliches Proper</p>
+
+	   <div style="position: absolute; top: 20px; right: 50px; text-align: left; max-width: 40%;">
+                <h2>Hobbies:</h2>
+                <p>I like playing games like:</p>
+                <img src="gamee1.jpg" alt="Game 1" style="max-width: 20%; margin-bottom: 30px;">
+                <img src="gamee2.jpg" alt="Game 2" style="max-width: 20%; margin-bottom: 30px;">
+                <img src="gamee3.jpg" alt="Game 3" style="max-width: 20%; margin-bottom: 30px;">
+
+                <!-- Horizontal line -->
+                <hr style="margin: 50px 5;">
+
+                <h2>Interest:</h2>
+                <p>I want to be a smart person in the future</p>
+
+<!-- Horizontal line -->
+<hr style="margin: 50px 5;">
+
+<h2>Skills:</h2>
+<ul>
+    <li>Programming</li>
+    <li>Graphic Design</li>
+    <li>Creativity</li>
+</ul>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="resume">
+        <h1>Blog/Articles</h1>
+    </section>
+
+
+    <section id="contact">
+        <h1>Contact</h1>
+        <div class="drifting-stars-container"></div>
+	<div class="paper">
+ 	 <div class="pin">
+  	  <div class="shadow"></div>
+  	  <div class="metal"></div>
+   	 <div class="bottom-circle"></div>
+ 	 </div>
+ 	<div class="contact-info">
+            <div class="platform">
+                <p>Messenger: Pochie Dionisio</p>
+            </div>
+	    <div class="platform">
+                <p>Contact Number: 09495444056 </p>
+	    </div>
+	    <div class="platform">
+                <p>Gmail: pochiezxc12@gmail.com </p>
+    </section>
+
+    <section id="social-media">
+        <h1>Social Media</h1>
+        <div class="ashfall-container"></div>
+ <img src="mam1.png" alt="Your Image" style="max-width: 18%; border-radius: 10px; margin-top: 20px;">    
+ <img src="ig.webp" class="flying-image" alt="Image 1">
+    <img src="fb.png" class="flying-image" alt="Image 2">
+    <img src="twt.jpg" class="flying-image" alt="Image 3">
+  </div>
+  <script src="script.js"></script>
+    </section>
+
+    <script>
+        function showSection(sectionId) {
+            var sections = document.querySelectorAll('section');
+            sections.forEach(function(section) {
+                section.style.display = 'none';
+                section.style.animation = '';
+            });
+
+            var existingElements = document.querySelectorAll('.snowflake, .raindrop, .shooting-star, .color-drop, .ashfall, .drifting-star, .firefly');
+            existingElements.forEach(function(element) {
+                element.parentNode.removeChild(element);
+            });
+
+            var selectedSection = document.getElementById(sectionId);
+            if (selectedSection) {
+                selectedSection.style.display = 'block';
+                selectedSection.style.animation = 'slideIn 0.5s ease-in-out';
+
+                var container;
+
+                if (sectionId === 'about') {
+                    container = document.querySelector('.snowfall');
+                    for (var i = 0; i < 50; i++) {
+                        var raindrop = document.createElement('div');
+                        raindrop.className = 'raindrop';
+                        raindrop.style.left = Math.random() * 100 + 'vw';
+                        raindrop.style.animationDuration = (Math.random() * 1 + 0.5) + 's';
+                        container.appendChild(raindrop);
+                    }
+          
+                } else if (sectionId === 'contact') {
+                    container = document.querySelector('.drifting-stars-container');
+                    for (var i = 0; i < 100; i++) {
+                        var driftingStar = document.createElement('div');
+                        driftingStar.className = 'drifting-star';
+                        driftingStar.style.left = Math.random() * 100 + 'vw';
+                        driftingStar.style.top = Math.random() * 100 + 'vh';
+                        driftingStar.style.animationDuration = (Math.random() * 5 + 2) + 's';
+                        
+                        driftingStar.style.backgroundColor = i % 2 === 0 ? 'blue' : 'purple';
+
+                        container.appendChild(driftingStar);
+                    }
+                } else if (sectionId === 'social-media') {
+                    container = document.querySelector('.ashfall-container');
+                    for (var i = 0; i < 100; i++) {
+                        var ashfall = document.createElement('div');
+                        ashfall.className = 'ashfall';
+                        ashfall.style.left = Math.random() * 100 + 'vw';
+                        ashfall.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                        
+                        ashfall.style.backgroundColor = 'red';
+                        
+                        container.appendChild(ashfall);
+                    }
+                } else {
+                    container = document.querySelector('.snowfall');
+                    for (var i = 0; i < 50; i++) {
+                        var snowflake = document.createElement('div');
+                        snowflake.className = 'snowflake';
+                        snowflake.style.left = Math.random() * 100 + 'vw';
+                        snowflake.style.animationDuration = (Math.random() * 1 + 0.5) + 's';
+                        container.appendChild(snowflake);
+                    }
+                }
+            }
+        }
+document.addEventListener('DOMContentLoaded', function () {
+    // ... (existing code)
+
+    // Add click event listener to the paper
+    var paper = document.querySelector('#home .paper');
+    var paperContent = document.querySelector('#home .paper-content');
+
+    paper.addEventListener('click', function () {
+        // Toggle the class to show/hide the content
+        paperContent.classList.toggle('visible');
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const flyingImages = document.querySelectorAll(".flying-image");
+
+    function moveImage(image) {
+        const maxX = window.innerWidth - image.clientWidth;
+        const maxY = window.innerHeight - image.clientHeight;
+
+        const randomX = Math.floor(Math.random() * maxX);
+        const randomY = Math.floor(Math.random() * maxY);
+
+        // Ensure the image stays within the visible area
+        const constrainedX = Math.min(randomX, window.innerWidth - image.clientWidth);
+        const constrainedY = Math.min(randomY, window.innerHeight - image.clientHeight);
+
+        image.style.transform = `translate(${constrainedX}px, ${constrainedY}px)`;
+    }
+
+    function animateImages() {
+        flyingImages.forEach((image) => {
+            moveImage(image);
+        });
+
+        setTimeout(animateImages, 3000); // Move images every 3 seconds
+    }
+
+    // Recalculate positions on window resize
+    window.addEventListener('resize', function () {
+        flyingImages.forEach((image) => {
+            moveImage(image);
+        });
+    });
+
+    animateImages();
+});
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var container = document.querySelector('.snowfall');
+            for (var i = 0; i < 50; i++) {
+                var snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.style.left = Math.random() * 100 + 'vw';
+                snowflake.style.animationDuration = (Math.random() * 1 + 0.5) + 's';
+                container.appendChild(snowflake);
+            }
+        });
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
